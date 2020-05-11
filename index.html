@@ -67,7 +67,7 @@
         //set up chat_message.write scope in line developer console
         //can send message back when context type value is not none
         if (liff.getContext().type !== 'none') {
-          await liff.liff.sendMessages([
+          await liff.sendMessages([
             {
               type: 'sticker',
               stickerId: 1,
