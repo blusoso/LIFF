@@ -64,13 +64,19 @@
 
       async function sendMsg() {}
 
-      function getContext() {}
+      function getContext() {
+        document.getElementById('type').append(liff.getContext().type); //1 to 1, room, chat room, none = external browser
+        document.getElementById('viewType').append(liff.getContext().viewType); //LIFF View type -> full, tall, compact
+        document.getElementById('utouId').append(liff.getContext().utouId); // 1 to 1 chat room id
+        document.getElementById('roomId').append(liff.getContext().roomId); // chat room id -> invited friend to chat room
+        document.getElementById('groupId').append(liff.getContext().groupId); // group chat room id
+      }
 
       async function getUserProfile() {
         // getUserProfile return Promise -> use async, await
         // async, await = run code each line and wait it completed
         const profile = await liff.getProfile();
-        alert(liff.getProfile());
+        // alert(liff.getProfile());
         document.getElementById('pictureUrl').src = profile.pictureUrl;
         document.getElementById('userId').append(profile.userId);
         document.getElementById('statusMessage').append(profile.statusMessage);
@@ -102,7 +108,7 @@
         await liff.init({ liffId: '1654190193-G1jdZdxQ' }); //setup liff by bring after LIFF URL in line developers console
         getEnvironment();
         getUserProfile();
-        // getContext()
+        getContext(); //บริบท
         // getFriendship()
         // createUniversalLink()
       }
