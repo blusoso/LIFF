@@ -70,7 +70,7 @@
         // getUserProfile return Promise -> use async, await
         // async, await = run code each line and wait it completed
         const profile = await liff.getProfile();
-        // alert(profile);
+        alert(profile);
         document.getElementById('pictureUrl').src = profile.pictureUrl;
         document.getElementById('userId').append(profile.userId);
         document.getElementById('statusMessage').append(profile.statusMessage);
