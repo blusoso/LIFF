@@ -62,7 +62,21 @@
 
       async function getFriendship() {}
 
-      async function sendMsg() {}
+      async function sendMsg() {
+        //send message back to user
+        //set up chat_message.write scope in line developer console
+        //can send message back when context type value is not none
+        if (liff.getContext().type !== 'none') {
+          await liff.liff.sendMessages([
+            {
+              type: 'sticker',
+              stickerId: 1,
+              packageId: 1,
+            },
+          ]);
+          alert('Message Sent');
+        }
+      }
 
       function getContext() {
         document.getElementById('type').append(liff.getContext().type); //1 to 1, room, chat room, none = external browser
