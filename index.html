@@ -54,13 +54,36 @@
 
       function logOut() {}
 
-      function closed() {}
+      function closed() {
+        //close liff automaticly ex. after user buy item success -> close liff
+        liff.closeWindow();
+      }
 
-      async function scanCode() {}
+      async function scanCode() {
+        //QR Code, open QR code option in line development console
+        //QR Code Reader
+        const code = await liff.scanCode();
+        document.getElementById('scanCode').append(code.value);
+      }
 
-      function openWindow() {}
+      function openWindow() {
+        //open link browser in line app or external
+        liff.openWindow({
+          url: 'https://line.me',
+          external: true,
+        });
+      }
 
-      async function getFriendship() {}
+      async function getFriendship() {
+        const friend = await liff.getFriendship(); //retutrn boolean
+        document.getElementById('friendship').append(friend.friendFlag);
+
+        if (!friend.friendFlag) {
+          if (confirm('คุณไม่ได้เป็นเพื่อนกับแชทบอท จะเพิ่มเลยมั้ย?')) {
+            window.location = 'link chatbot';
+          }
+        }
+      }
 
       async function sendMsg() {
         //send message back to user
@@ -68,11 +91,13 @@
         //can send message back when context type value is not none
         if (liff.getContext().type !== 'none') {
           await liff.sendMessages([
+            // 1 bubbles
             {
               type: 'sticker',
               stickerId: 1,
               packageId: 1,
             },
+            //send most 5 bubbles
           ]);
           alert('Message Sent successful');
         }
@@ -120,11 +145,19 @@
 
       async function main() {
         await liff.init({ liffId: '1654190193-G1jdZdxQ' }); //setup liff by bring after LIFF URL in line developers console
-        getEnvironment();
-        getUserProfile();
-        getContext(); //บริบท
-        // getFriendship()
-        // createUniversalLink()
+        document.getElementById('isLoggedIn').append(liff.isLoggedIn());
+        if (liff.isLoggedIn()) {
+          // check user logged inm in line app -> user auto logged in
+          getEnvironment();
+          getUserProfile();
+          getContext(); //บริบท
+          // link with chat bot OA in line developer console
+          getFriendship(); //confirm user add friend with chat bot linked
+          // createUniversalLink()
+        } else {
+          //user dont logged in, open with external browser
+          liff.login(); // open login page
+        }
       }
       main();
     </script>
