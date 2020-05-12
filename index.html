@@ -66,16 +66,16 @@
         //send message back to user
         //set up chat_message.write scope in line developer console
         //can send message back when context type value is not none
-        if (liff.getContext().type !== 'none') {
-          await liff.sendMessages([
-            {
-              type: 'sticker',
-              stickerId: 1,
-              packageId: 1,
-            },
-          ]);
-          alert('Message Sent');
-        }
+        // if (liff.getContext().type !== 'none') {
+        //   await liff.sendMessages([
+        //     {
+        //       type: 'sticker',
+        //       stickerId: 1,
+        //       packageId: 1,
+        //     },
+        //   ]);
+        // }
+        alert('Message Sent');
       }
 
       function getContext() {
