@@ -39,20 +39,34 @@
     <button id="btnLogOut" onclick="logOut()">Log Out</button>
     <button id="btnClose" onclick="closed()">Close</button>
 
-    <!-- <script src="js/vconsole.min.js"></script> -->
-    <!-- <script>
-    var vConsole = new VConsole()
-    console.log("Hello World!")
-  </script> -->
+    <!-- Debug -->
+    <script src="js/vconsole.min.js"></script>
+    <script>
+      var vConsole = new VConsole();
+      console.log('Hello World!');
+    </script>
 
     <!-- liff sdk -->
     <script src="https://static.line-scdn.net/liff/edge/versions/2.1.13/sdk.js"></script>
     <script>
       function createUniversalLink() {}
 
-      async function shareMsg() {}
+      async function shareMsg() {
+        //share target picker, can share message to choosen freind
+        //open LIFF -> share target picker option in line dev console
+        await liff.shareTargetPicker([
+          //5 bubles
+          {
+            type: 'text',
+            text: 'sent by share target picker',
+          },
+        ]);
+      }
 
-      function logOut() {}
+      function logOut() {
+        liff.logout();
+        window.location.reload();
+      }
 
       function closed() {
         //close liff automaticly ex. after user buy item success -> close liff
